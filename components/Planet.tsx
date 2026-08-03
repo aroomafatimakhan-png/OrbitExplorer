@@ -122,6 +122,7 @@ export default function Planet({
           center
           distanceFactor={18}
           style={{ pointerEvents: "none", whiteSpace: "nowrap" }}
+          wrapperClass="pointer-events-none"
         >
           <span
             className={`font-mono text-[10px] tracking-[0.2em] uppercase ${

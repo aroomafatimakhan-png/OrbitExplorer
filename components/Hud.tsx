@@ -17,6 +17,7 @@ export default function Hud() {
   const now = useClock();
   const timeScale = useAppStore((s) => s.timeScale);
   const setTimeScale = useAppStore((s) => s.setTimeScale);
+  const setSelectedPlanet = useAppStore((s) => s.setSelectedPlanet);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-20">
@@ -32,6 +33,23 @@ export default function Hud() {
       <div className="absolute inset-x-4 top-12 sm:top-14 flex items-center justify-between rounded-md border border-panel-border bg-panel/70 px-4 py-2 text-[9px] sm:text-[10px] tracking-[0.2em] text-mist-dim backdrop-blur-sm shadow-hud">
         <span>MISSION VIEW · ORBITAL NAVIGATION ACTIVE</span>
         <span className="hidden md:inline">TARGET: RESOLVE INNER PLANET TRAJECTORY</span>
+      </div>
+
+      <div className="pointer-events-auto absolute top-28 right-4 sm:right-auto sm:top-24 sm:left-6 flex flex-col gap-2 rounded-md border border-panel-border bg-panel/80 px-3 py-2 shadow-hud text-mist text-[10px]">
+        <button
+          type="button"
+          onClick={() => setSelectedPlanet("sun")}
+          className="rounded px-3 py-2 bg-starlight/10 text-starlight hover:bg-starlight/20"
+        >
+          Select Sun
+        </button>
+        <button
+          type="button"
+          onClick={() => setSelectedPlanet("mercury")}
+          className="rounded px-3 py-2 bg-starlight/10 text-starlight hover:bg-starlight/20"
+        >
+          Select Mercury
+        </button>
       </div>
     </div>
 
