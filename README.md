@@ -53,6 +53,16 @@ npm run dev
 
 Open http://localhost:3000.
 
+## Screenshots
+
+The following UI screenshots are available in the `screenshots/` folder:
+
+- `ui-page-fixed.png` — main app UI with HUD controls
+- `sun-info-direct.png` — Sun info panel captured via HUD quick-select
+- `mercury-info-button.png` — Mercury info panel captured via HUD quick-select
+- `mercury-info-fixed.png` — Mercury info panel from the final interaction
+- `rotated-ui-fixed.png` — rotated scene for better planet visibility
+- `ui-hud-fixed.png` — HUD quick-select buttons visible on screen
 
 ## Deploying to Vercel with a database
 
