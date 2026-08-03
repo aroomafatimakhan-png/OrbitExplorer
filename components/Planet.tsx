@@ -68,7 +68,13 @@ export default function Planet({
       {/* orbit path */}
       <mesh rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[orbit - 0.05, orbit + 0.05, 256]} />
-        <meshBasicMaterial color="#92b3ff" transparent opacity={0.55} side={THREE.DoubleSide} toneMapped={false} />
+        <meshBasicMaterial
+          color={isSelected ? "#8FD9FF" : "#92b3ff"}
+          transparent
+          opacity={isSelected ? 0.9 : 0.55}
+          side={THREE.DoubleSide}
+          toneMapped={false}
+        />
       </mesh>
 
       <group position={[orbit, 0, 0]}>
@@ -118,19 +124,21 @@ export default function Planet({
           </mesh>
         )}
         <Html
-          position={[0, -radius - 0.55, 0]}
+          position={[0, radius + 0.65, 0]}
           center
           distanceFactor={18}
-          style={{ pointerEvents: "none", whiteSpace: "nowrap" }}
+          style={{
+            pointerEvents: "none",
+            whiteSpace: "nowrap",
+            color: isSelected ? "#8FD9FF" : "#E5E7EB",
+            fontSize: isSelected ? "12px" : "10px",
+            textTransform: "uppercase",
+            letterSpacing: "0.18em",
+            textShadow: "0 0 12px rgba(0,0,0,0.4)",
+          }}
           wrapperClass="pointer-events-none"
         >
-          <span
-            className={`font-mono text-[10px] tracking-[0.2em] uppercase ${
-              isSelected ? "text-starlight" : "text-mist-dim"
-            }`}
-          >
-            {data.name}
-          </span>
+          <span>{data.name}</span>
         </Html>
       </group>
     </group>

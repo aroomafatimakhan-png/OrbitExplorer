@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PLANETS } from "@/lib/planets";
+import { orbitRadius } from "@/components/Planet";
 import { useAppStore } from "@/lib/store";
 
 function useIsDesktop() {
@@ -46,6 +47,9 @@ export default function PlanetPanel() {
   const selected = useAppStore((s) => s.selectedPlanet);
   const setSelected = useAppStore((s) => s.setSelectedPlanet);
   const planet = PLANETS.find((p) => p.id === selected);
+  const selectedIndex = planet ? PLANETS.findIndex((p) => p.id === planet.id) : -1;
+  const visualOrbit = planet ? orbitRadius(planet.distanceAu, selectedIndex) : 0;
+  const rotationDirection = planet?.rotationHours < 0 ? "Retrograde" : "Prograde";
   const isSun = selected === "sun";
   const isDesktop = useIsDesktop();
   const visibleSizeKm = isSun ? 696340 * 2 : planet ? planet.radiusKm * 2 : 0;
@@ -97,9 +101,12 @@ export default function PlanetPanel() {
                     <SizeBar size={visibleSizeKm} maxSize={maxSizeKm} />
                   </div>
                   <Row label="DISTANCE (AU)" value={planet!.distanceAu} />
+                  <Row label="VISUAL ORBIT" value={`${visualOrbit.toFixed(1)} units`} />
                   <Row label="ORBITAL PERIOD (DAYS)" value={planet!.orbitalPeriodDays.toLocaleString()} />
                   <Row label="ROTATION (HOURS)" value={planet!.rotationHours} />
+                  <Row label="ROTATION DIRECTION" value={rotationDirection} />
                   <Row label="AXIAL TILT (°)" value={planet!.axialTiltDeg} />
+                  <Row label="RING SYSTEM" value={planet!.hasRings ? "Present" : "None"} />
                   <Row label="MOONS" value={planet!.moons} />
                   <Row label="TEMPERATURE (°C)" value={planet!.temperatureC} />
                   <Row label="COMPOSITION" value={planet!.composition} />

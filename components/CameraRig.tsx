@@ -17,8 +17,8 @@ export default function CameraRig() {
 
     cam.fov = mobile ? 62 : tablet ? 54 : 42;
     const pullback = mobile ? 1.7 : tablet ? 1.35 : 1;
-    cam.position.set(-22 * pullback, 8.5 * pullback, 24 * pullback);
-    cam.lookAt(15, -1, -5);
+    cam.position.set(-28 * pullback, 10 * pullback, 32 * pullback);
+    cam.lookAt(0, 0, 0);
     cam.updateProjectionMatrix();
     applied.current = true;
   }, [camera, size.width]);
