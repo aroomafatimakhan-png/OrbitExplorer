@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 
 // Builds the diagonal purple/blue Milky Way band + nebula haze as a canvas
@@ -81,7 +81,13 @@ function makeNebulaTexture() {
 }
 
 export default function NebulaBackdrop() {
-  const texture = useMemo(() => makeNebulaTexture(), []);
+  const [texture, setTexture] = useState<THREE.CanvasTexture | null>(null);
+
+  useEffect(() => {
+    setTexture(makeNebulaTexture());
+  }, []);
+
+  if (!texture) return null;
 
   return (
     <mesh scale={[-1, 1, 1]}>

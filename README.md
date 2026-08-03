@@ -53,6 +53,8 @@ npm run dev
 
 Open http://localhost:3000.
 
+<<<<<<< HEAD
+=======
 ## Screenshots
 
 The following UI screenshots are available in the `screenshots/` folder:
@@ -63,6 +65,7 @@ The following UI screenshots are available in the `screenshots/` folder:
 - `mercury-info-fixed.png` — Mercury info panel from the final interaction
 - `rotated-ui-fixed.png` — rotated scene for better planet visibility
 - `ui-hud-fixed.png` — HUD quick-select buttons visible on screen
+>>>>>>> 1b16a02 (Document screenshot files in README)
 
 ## Deploying to Vercel with a database
 
@@ -85,6 +88,9 @@ The following UI screenshots are available in the `screenshots/` folder:
    npm run db:seed
    ```
 
+
+
+
 Three things score well with judges in the first 30 seconds, in this order:
 
 1. **It loads and runs on the live URL** — deploy early, deploy often; a
@@ -95,6 +101,7 @@ Three things score well with judges in the first 30 seconds, in this order:
 3. **A clear "what's next" story** — the roadmap above is your pitch for why
    the architecture supports the bigger vision, without claiming it's already
    done.
+>>>>>>> 988368f (Update solar system camera, orbit highlighting, labels and planet details)
 
 ## Tech stack
 

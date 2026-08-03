@@ -15,6 +15,12 @@ export type PlanetData = {
   fact: string;
 };
 
+const ORBIT_RADII = [6.3, 8.9, 11.6, 15.0, 23.0, 32.0, 40.5, 49.0] as const;
+
+export function orbitRadius(distanceAu: number, index: number) {
+  return ORBIT_RADII[index] ?? ORBIT_RADII[ORBIT_RADII.length - 1] + index * 4;
+}
+
 // Real astronomical data. Visual scene scales radius and distance
 // logarithmically/independently so the whole system is legible on one screen —
 // true-to-scale would put Neptune 2,700x further out than Mercury is wide.

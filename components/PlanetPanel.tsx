@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { PLANETS } from "@/lib/planets";
-import { orbitRadius } from "@/components/Planet";
+import { PLANETS, orbitRadius } from "@/lib/planets";
 import { useAppStore } from "@/lib/store";
 
 function useIsDesktop() {
@@ -49,7 +48,7 @@ export default function PlanetPanel() {
   const planet = PLANETS.find((p) => p.id === selected);
   const selectedIndex = planet ? PLANETS.findIndex((p) => p.id === planet.id) : -1;
   const visualOrbit = planet ? orbitRadius(planet.distanceAu, selectedIndex) : 0;
-  const rotationDirection = planet?.rotationHours < 0 ? "Retrograde" : "Prograde";
+  const rotationDirection = planet ? (planet.rotationHours < 0 ? "Retrograde" : "Prograde") : "Prograde";
   const isSun = selected === "sun";
   const isDesktop = useIsDesktop();
   const visibleSizeKm = isSun ? 696340 * 2 : planet ? planet.radiusKm * 2 : 0;

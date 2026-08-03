@@ -4,6 +4,7 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Ring, Trail, Html } from "@react-three/drei";
 import * as THREE from "three";
+import { orbitRadius } from "@/lib/planets";
 import type { PlanetData } from "@/lib/planets";
 import { useAppStore } from "@/lib/store";
 
@@ -13,13 +14,8 @@ export const SUN_RADIUS = 8;
 const RADIUS_SCALE = 0.00018;
 const MIN_RADIUS = 0.24;
 const MAX_PLANET_RADIUS = 4.2;
-const ORBIT_RADII = [6.3, 8.9, 11.6, 15.0, 23.0, 32.0, 40.5, 49.0] as const;
 const ORBIT_SPEED_SCALE = 0.045;
 const START_ANGLES = [-1.25, -0.95, -0.55, -0.25, 0.35, 0.8, 1.4, 1.85] as const;
-
-export function orbitRadius(distanceAu: number, index: number) {
-  return ORBIT_RADII[index] ?? ORBIT_RADII[ORBIT_RADII.length - 1] + index * 4;
-}
 
 export default function Planet({
   data,

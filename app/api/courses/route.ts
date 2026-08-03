@@ -3,6 +3,13 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
+    if (!prisma) {
+      return NextResponse.json(
+        { error: "Database is not configured for this build. Set DATABASE_URL to a valid Postgres connection string." },
+        { status: 500 }
+      );
+    }
+
     const courses = await prisma.course.findMany({
       where: { published: true },
       orderBy: { order: "asc" },
