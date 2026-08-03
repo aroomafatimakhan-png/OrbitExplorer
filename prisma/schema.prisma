@@ -1,0 +1,128 @@
+// Planetary System — database schema
+// Deploy target: Vercel Postgres (Neon) — see README for setup.
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  passwordHash  String?
+  avatarUrl     String?
+  rank          Rank     @default(CADET)
+  xp            Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  progress      CourseProgress[]
+  achievements  UserAchievement[]
+  bookmarks     Bookmark[]
+  notes         Note[]
+}
+
+enum Rank {
+  CADET
+  EXPLORER
+  SCIENTIST
+  COMMANDER
+  ASTRONAUT
+  MISSION_DIRECTOR
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  summary     String
+  level       CourseLevel
+  topic       String
+  order       Int      @default(0)
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  lessons     Lesson[]
+  progress    CourseProgress[]
+}
+
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  PROFESSIONAL
+  RESEARCH
+  MASTERCLASS
+}
+
+model Lesson {
+  id        String   @id @default(cuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title     String
+  content   String   @db.Text
+  order     Int      @default(0)
+  quiz      Json?
+
+  @@index([courseId])
+}
+
+model CourseProgress {
+  id            String   @id @default(cuid())
+  userId        String
+  courseId      String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  percent       Int      @default(0)
+  completedAt   DateTime?
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, courseId])
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  title       String
+  description String
+  icon        String
+
+  users       UserAchievement[]
+}
+
+model UserAchievement {
+  id             String       @id @default(cuid())
+  userId         String
+  achievementId  String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement    Achievement  @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  earnedAt       DateTime     @default(now())
+
+  @@unique([userId, achievementId])
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  targetType String  // "planet" | "article" | "course"
+  targetId  String
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  targetId  String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+}
