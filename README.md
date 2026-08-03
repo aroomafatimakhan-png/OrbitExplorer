@@ -53,6 +53,7 @@ npm run dev
 
 Open http://localhost:3000.
 
+
 ## Deploying to Vercel with a database
 
 1. Push this folder to a GitHub repo.
@@ -74,17 +75,7 @@ Open http://localhost:3000.
    npm run db:seed
    ```
 
-## For hackathon judging
 
-Three things score well with judges in the first 30 seconds, in this order:
-1. **It loads and runs on the live URL** — deploy early, deploy often; a
-   working link beats a longer feature list every time.
-2. **One unmistakable signature moment** — here, that's clicking a planet and
-   watching the HUD panel slide in with real data while the body highlights
-   in the scene. Lead your demo with that, not with a feature tour.
-3. **A clear "what's next" story** — the roadmap above is your pitch for why
-   the architecture supports the bigger vision, without claiming it's already
-   done.
 
 ## Tech stack
 
